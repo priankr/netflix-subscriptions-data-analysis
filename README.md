@@ -74,48 +74,13 @@ netflix-subscriptions-data-analysis/
 └── README.md                                 # Project documentation
 ```
 
-## Running the Analysis
-
-### Prerequisites
-
-```bash
-# Python 3.9 or higher recommended
-pip install pandas numpy matplotlib seaborn pycountry-convert jupyter
-```
-
-### Execute the Analysis
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/priankr/netflix-subscriptions-data-analysis.git
-   cd netflix-subscriptions-data-analysis
-   ```
-
-2. **Launch Jupyter Notebook:**
-   ```bash
-   jupyter notebook
-   ```
-
-3. **Open the analysis file:**
-   - Navigate to `netflix-data-analysis-2025.ipynb`
-   - Run all cells to regenerate the complete analysis
-
-4. **View results:**
-   - Visualizations are automatically saved to `docs/images/`
-   - Summary statistics export to `docs/summary.json`
-   - Dashboard opens `docs/index.html` in any web browser
-
 ### View the Dashboard
 
 The interactive dashboard can be viewed without running the Python analysis:
 
-1. **Local viewing:**
-   - Open `docs/index.html` directly in your web browser
-   - All visualizations and data are embedded
+1. **Local viewing:** Open `docs/index.html` directly in your web browser. All visualizations and data are embedded
 
-2. **GitHub Pages (if deployed):**
-   - Visit the live dashboard at your GitHub Pages URL
-   - Configure in repository Settings → Pages → Deploy from `/docs` folder
+2. **GitHub Pages:** Visit the live dashboard at your GitHub Pages URL
 
 ## Analysis Methodology
 
@@ -144,13 +109,6 @@ The analysis generates comprehensive visualizations including:
 - **Correlation analysis:** Relationship between library size and cost
 - **Value rankings:** Best and worst markets by cost per title
 - **Tier analysis:** Ad-supported vs traditional plan savings
-
-### Statistical Methods
-
-- Descriptive statistics (mean, median, standard deviation)
-- Correlation analysis between variables
-- Regional aggregation and comparison
-- Outlier identification and interpretation
 
 ## Interactive Dashboard Features
 
@@ -202,61 +160,8 @@ The original 2021 analysis is preserved in `netflix-data-analysis-2021.ipynb` fo
 - Quality metrics (HD, 4K availability) not included in analysis
 - User engagement and satisfaction data not available
 
-## Future Analysis Opportunities
-
-Potential extensions of this research:
-
-1. **Temporal analysis:** Track pricing changes over time across markets
-2. **Content composition:** Analyze movies vs TV shows ratio by country
-3. **Competitive comparison:** Include other streaming services (Disney+, Amazon Prime)
-4. **User metrics:** Incorporate subscriber counts and engagement data
-5. **Economic correlation:** Compare with GDP, purchasing power parity, broadband adoption
-
-## Technologies Used
-
-- **Python 3.9+** - Data analysis and processing
-- **Pandas** - Data manipulation and aggregation
-- **NumPy** - Numerical computations
-- **Matplotlib & Seaborn** - Statistical visualizations
-- **pycountry-convert** - Geographic classification
-- **Jupyter Notebook** - Interactive analysis environment
-- **HTML/CSS/JavaScript** - Interactive dashboard
-- **Chart.js** - Dashboard visualizations
-
 ## Data Source
 
 This analysis uses publicly available Netflix pricing data compiled from official Netflix websites across different countries. The dataset captures subscription tiers, pricing in USD, and content library sizes as of 2025.
 
 **Original dataset source:** [Kaggle - Netflix Subscription Price Dataset](https://www.kaggle.com/datasets/netflix-subscription-prices)
-
-## Contributing
-
-This project serves as an educational resource for data analysis and visualization. Contributions are welcome:
-
-- **Data updates:** Submit updated pricing or new country data
-- **Analysis improvements:** Suggest additional metrics or visualizations
-- **Code optimization:** Improve processing efficiency or visualization quality
-- **Documentation:** Enhance explanations or add usage examples
-
-## License
-
-This project is available for educational and research purposes. Please attribute appropriately when using or referencing this analysis.
-
-## Author
-
-**Prian Kravichandar**
-
-- GitHub: [@priankr](https://github.com/priankr)
-- Original analysis: [Kaggle Notebook](https://www.kaggle.com/code/priankravichandar/netflix-subscriptions-data-analysis)
-
-## Acknowledgments
-
-- Dataset compiled from official Netflix regional websites
-- Kaggle community for data sharing and feedback
-- Open-source Python data science ecosystem
-
----
-
-**Last Updated:** January 2025
-
-For questions, suggestions, or collaboration opportunities, please open an issue in the GitHub repository.
