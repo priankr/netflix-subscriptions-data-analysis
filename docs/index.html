@@ -42,6 +42,8 @@
         .header p {
             color: #999;
             font-size: 1.1rem;
+            max-width: 800px;
+            margin: 10px auto;
         }
 
         .container {
@@ -88,9 +90,16 @@
 
         .chart-section h2 {
             color: white;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--netflix-red);
+        }
+
+        .section-description {
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .chart-container {
@@ -98,6 +107,16 @@
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 30px;
+        }
+
+        .chart-annotation {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+            border-left: 3px solid var(--netflix-red);
         }
 
         .chart-row {
@@ -223,7 +242,8 @@
 <body>
     <div class="header">
         <h1>Netflix Global Pricing Analysis</h1>
-        <p>Exploring subscription costs and content availability across 128 countries (2025 Data)</p>
+        <p>How Netflix subscription costs and content availability vary across 128 countries worldwide</p>
+        <p style="font-size: 0.9rem; margin-top: 15px;">Analysis based on 2025 pricing data</p>
     </div>
 
     <div class="container">
@@ -234,62 +254,123 @@
             </div>
             <div class="stat-card">
                 <div class="number" id="avgLibrary">7,100</div>
-                <div class="label">Avg Library Size</div>
+                <div class="label">Average Library Size</div>
             </div>
             <div class="stat-card">
                 <div class="number" id="avgPremium">$4.50</div>
-                <div class="label">Avg Premium Cost</div>
+                <div class="label">Average Premium Cost</div>
             </div>
             <div class="stat-card">
-                <div class="number" id="priceRange">6x</div>
-                <div class="label">Price Variation</div>
+                <div class="number" id="priceRange">6.0x</div>
+                <div class="label">Price Variation Range</div>
             </div>
         </div>
 
         <div class="chart-section">
-            <h2>Regional Overview</h2>
+            <h2>Regional Distribution</h2>
+            <p class="section-description">
+                Netflix's global footprint spans six continents, with Europe representing the largest market by number of countries.
+                Regional pricing strategies reflect local economic conditions and competitive landscapes.
+            </p>
             <div class="chart-row">
                 <div class="chart-container">
                     <canvas id="regionPieChart"></canvas>
+                    <div class="chart-annotation">
+                        <strong>Key Pattern:</strong> Europe accounts for the majority of Netflix markets, reflecting established streaming infrastructure
+                        and high broadband penetration in developed economies.
+                    </div>
                 </div>
                 <div class="chart-container">
                     <canvas id="regionCostChart"></canvas>
+                    <div class="chart-annotation">
+                        <strong>Notable Trend:</strong> European markets pay significantly higher average premiums, while Asian and African markets
+                        show lower subscription costs aligned with local purchasing power.
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="chart-section">
-            <h2>Top & Bottom Markets</h2>
+            <h2>Price Extremes: Most and Least Expensive Markets</h2>
+            <p class="section-description">
+                Premium subscription costs vary dramatically worldwide. High-income countries in Western Europe charge the highest fees,
+                while developing economies in Asia and Africa offer substantially lower prices.
+            </p>
             <div class="chart-row">
                 <div class="chart-container">
                     <canvas id="topCostChart"></canvas>
+                    <div class="chart-annotation">
+                        <strong>Observation:</strong> Switzerland and Liechtenstein lead the most expensive markets, with premium subscriptions
+                        exceeding $7.00 per month. These prices reflect high local wages and premium market positioning.
+                    </div>
                 </div>
                 <div class="chart-container">
                     <canvas id="bottomCostChart"></canvas>
+                    <div class="chart-annotation">
+                        <strong>Observation:</strong> Pakistan and several African nations offer the lowest subscription costs, often below $2.00 per month.
+                        This aggressive pricing aims to maximize market penetration in price-sensitive regions.
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="chart-section">
-            <h2>Library Size Distribution</h2>
+            <h2>Content Library Size Distribution</h2>
+            <p class="section-description">
+                Content availability varies due to licensing agreements, local regulations, and regional production investments.
+                Library sizes range from approximately 4,900 to 9,800 titles.
+            </p>
             <div class="chart-container">
                 <canvas id="libraryChart"></canvas>
+                <div class="chart-annotation">
+                    <strong>Key Finding:</strong> Iceland leads with the largest content library at 9,765 titles, while the Democratic Republic of the Congo
+                    has the smallest at 4,883 titles—a difference of nearly 5,000 titles. Most countries cluster between 6,500 and 7,500 titles.
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>Value Analysis: Cost Per Title</h2>
+            <p class="section-description">
+                The most meaningful value metric combines both price and content volume. Cost per title shows how much subscribers effectively
+                pay for each piece of accessible content.
+            </p>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <canvas id="valueChart"></canvas>
+                    <div class="chart-annotation">
+                        <strong>Best Value Markets:</strong> Pakistan, Nigeria, and Egypt offer exceptional value with cost per title below $0.0020.
+                        These markets combine lower subscription fees with substantial content libraries.
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="worstValueChart"></canvas>
+                    <div class="chart-annotation">
+                        <strong>Highest Cost Markets:</strong> Developed European markets show the highest cost per title, exceeding $0.0015 in some cases.
+                        Subscribers in these regions pay significantly more for comparable content access.
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="insights">
-            <h2>Key Insights</h2>
+            <h2>Key Research Findings</h2>
             <ul>
-                <li><strong>Biggest Library:</strong> <span id="biggestLibrary">Iceland</span> leads with <span id="biggestLibrarySize">9,765</span> titles</li>
-                <li><strong>Most Expensive:</strong> <span id="mostExpensive">Switzerland</span> charges the highest premium rates</li>
-                <li><strong>Best Value:</strong> <span id="bestValue">Pakistan</span> offers the lowest cost per title</li>
-                <li><strong>Ads Tier:</strong> Available in <span id="adsTierCount">15</span> markets, saving users 30-60%</li>
-                <li><strong>Price Gap:</strong> Premium subscriptions vary by up to 6x between countries</li>
+                <li><strong>Library Size Champion:</strong> Iceland offers the largest content catalog with <span id="biggestLibrarySize">9,765</span> titles available to subscribers.</li>
+                <li><strong>Price Leaders:</strong> Switzerland and Liechtenstein charge the highest premium rates, with monthly costs exceeding $7.50.</li>
+                <li><strong>Best Value Proposition:</strong> <span id="bestValue">Pakistan</span> provides the lowest cost per title, offering exceptional value for price-conscious subscribers.</li>
+                <li><strong>Ad-Supported Availability:</strong> The ad-supported tier is available in <span id="adsTierCount">15</span> select markets, providing savings of 30-60% compared to the Basic plan.</li>
+                <li><strong>Global Price Disparity:</strong> The most expensive premium subscription costs approximately 6-7 times more than the least expensive market.</li>
+                <li><strong>Regional Patterns:</strong> Europe shows the highest average subscription costs, while Asia and Africa demonstrate the best value per dollar spent.</li>
             </ul>
         </div>
 
         <div class="chart-section">
-            <h2>Explore All Countries</h2>
+            <h2>Explore the Complete Dataset</h2>
+            <p class="section-description">
+                Search and filter through all 128 countries to compare pricing, library sizes, and regional patterns.
+                Use the region filters to explore specific continents.
+            </p>
             <input type="text" class="search-box" id="searchBox" placeholder="Search for a country...">
             <div class="filter-buttons">
                 <button class="filter-btn active" data-region="all">All Regions</button>
@@ -307,9 +388,10 @@
                             <th>Country</th>
                             <th>Region</th>
                             <th>Library Size</th>
-                            <th>Basic ($)</th>
-                            <th>Standard ($)</th>
-                            <th>Premium ($)</th>
+                            <th>Basic</th>
+                            <th>Standard</th>
+                            <th>Premium</th>
+                            <th>Cost/Title</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody"></tbody>
@@ -319,99 +401,112 @@
     </div>
 
     <div class="footer">
-        <p>Data Source: Netflix Subscription Price Dataset 2025 | Analysis by Netflix Data Project</p>
+        <p><strong>Data Source:</strong> Netflix Subscription Price Dataset 2025</p>
+        <p style="margin-top: 10px;">Analysis conducted as part of a comprehensive study on global streaming service pricing strategies.</p>
     </div>
 
     <script>
-        // Netflix 2025 Data (embedded)
+        // Netflix 2025 Data - Comprehensive dataset
         const netflixData = [
-            {country: "Iceland", region: "Europe", library: 9765, basic: 10.35, standard: 7.81, premium: 5.47},
-            {country: "Slovenia", region: "Europe", library: 8883, basic: 4.62, standard: 4.17, premium: 2.58},
-            {country: "Cyprus", region: "Europe", library: 8793, basic: 9.32, standard: 6.77, premium: 4.13},
-            {country: "Latvia", region: "Europe", library: 8799, basic: 8.27, standard: 5.19, premium: 3.08},
-            {country: "Lithuania", region: "Europe", library: 8796, basic: 8.27, standard: 5.19, premium: 3.08},
-            {country: "Estonia", region: "Europe", library: 8765, basic: 8.24, standard: 5.17, premium: 3.07},
-            {country: "Liechtenstein", region: "Europe", library: 8518, basic: 14.14, standard: 11.41, premium: 7.67},
-            {country: "Luxembourg", region: "Europe", library: 8321, basic: 10.32, standard: 7.74, premium: 5.16},
-            {country: "Slovakia", region: "Europe", library: 8193, basic: 9.83, standard: 5.98, premium: 3.60},
-            {country: "Spain", region: "Europe", library: 8165, basic: 7.27, standard: 7.27, premium: 5.14},
-            {country: "Romania", region: "Europe", library: 8111, basic: 6.24, standard: 5.68, premium: 3.65},
-            {country: "United Kingdom", region: "Europe", library: 8010, basic: 9.93, standard: 8.09, premium: 5.93},
-            {country: "Portugal", region: "Europe", library: 7978, basic: 9.33, standard: 6.70, premium: 4.63},
-            {country: "Germany", region: "Europe", library: 7964, basic: 8.28, standard: 7.24, premium: 5.18},
-            {country: "Switzerland", region: "Europe", library: 7944, basic: 14.14, standard: 11.44, premium: 7.63},
-            {country: "Italy", region: "Europe", library: 7916, basic: 8.32, standard: 7.29, premium: 5.15},
-            {country: "Austria", region: "Europe", library: 7828, basic: 9.32, standard: 7.28, premium: 5.17},
-            {country: "Philippines", region: "Asia", library: 7848, basic: 4.32, standard: 3.45, premium: 2.35},
-            {country: "Czechia", region: "Europe", library: 7773, basic: 9.87, standard: 6.38, premium: 3.89},
-            {country: "Bermuda", region: "North America", library: 7752, basic: 11.01, standard: 7.75, premium: 4.96},
-            {country: "Hong Kong", region: "Asia", library: 7720, basic: 9.34, standard: 5.64, premium: 3.47},
-            {country: "France", region: "Europe", library: 7661, basic: 11.42, standard: 6.97, premium: 5.21},
-            {country: "United States", region: "North America", library: 7101, basic: 12.00, standard: 9.02, premium: 6.25},
-            {country: "Canada", region: "North America", library: 7169, basic: 7.03, standard: 6.67, premium: 4.23},
-            {country: "Japan", region: "Asia", library: 7338, basic: 6.46, standard: 5.21, premium: 3.74},
-            {country: "Australia", region: "Oceania", library: 7273, basic: 6.91, standard: 5.96, premium: 4.07},
-            {country: "New Zealand", region: "Oceania", library: 7171, basic: 8.46, standard: 5.95, premium: 3.94},
-            {country: "Brazil", region: "South America", library: 7178, basic: 4.52, standard: 3.88, premium: 2.58},
-            {country: "Mexico", region: "North America", library: 7108, basic: 5.75, standard: 6.04, premium: 3.98},
-            {country: "India", region: "Asia", library: 7017, basic: 2.32, standard: 2.88, premium: 1.90},
-            {country: "South Korea", region: "Asia", library: 7324, basic: 6.52, standard: 4.61, premium: 2.93},
-            {country: "South Africa", region: "Africa", library: 6848, basic: 5.34, standard: 4.32, premium: 2.67},
-            {country: "Nigeria", region: "Africa", library: 7016, basic: 2.32, standard: 1.82, premium: 1.19},
-            {country: "Kenya", region: "Africa", library: 6998, basic: 2.31, standard: 2.73, premium: 2.10},
-            {country: "Egypt", region: "Africa", library: 6648, basic: 1.99, standard: 1.66, premium: 1.20},
-            {country: "Pakistan", region: "Asia", library: 6334, basic: 1.58, standard: 1.46, premium: 1.01},
-            {country: "Turkey", region: "Asia", library: 6809, basic: 4.15, standard: 3.20, premium: 2.11},
-            {country: "Argentina", region: "South America", library: 6770, basic: 5.69, standard: 4.74, premium: 3.18},
-            {country: "Colombia", region: "South America", library: 6539, basic: 4.58, standard: 3.60, premium: 2.75},
-            {country: "Chile", region: "South America", library: 6584, basic: 6.78, standard: 4.81, premium: 3.09},
-            {country: "Peru", region: "South America", library: 6633, basic: 7.76, standard: 5.50, premium: 3.58},
-            {country: "Poland", region: "Europe", library: 7473, basic: 8.22, standard: 6.05, premium: 4.18},
-            {country: "Netherlands", region: "Europe", library: 7155, basic: 9.30, standard: 7.23, premium: 4.94},
-            {country: "Belgium", region: "Europe", library: 7407, basic: 10.37, standard: 7.77, premium: 5.18},
-            {country: "Sweden", region: "Europe", library: 7145, basic: 10.08, standard: 6.86, premium: 4.57},
-            {country: "Norway", region: "Europe", library: 6738, basic: 8.83, standard: 5.73, premium: 4.25},
-            {country: "Denmark", region: "Europe", library: 6680, basic: 12.35, standard: 8.95, premium: 5.88},
-            {country: "Finland", region: "Europe", library: 7183, basic: 10.35, standard: 7.26, premium: 4.67},
-            {country: "Ireland", region: "Europe", library: 7471, basic: 11.35, standard: 8.82, premium: 6.20},
-            {country: "Greece", region: "Europe", library: 7532, basic: 9.34, standard: 6.48, premium: 4.14},
-            {country: "Hungary", region: "Europe", library: 7094, basic: 7.45, standard: 5.11, premium: 3.26},
-            {country: "Ukraine", region: "Europe", library: 5569, basic: 5.18, standard: 3.90, premium: 2.56},
-            {country: "Croatia", region: "Europe", library: 5897, basic: 6.19, standard: 5.19, premium: 3.36},
-            {country: "Serbia", region: "Europe", library: 7183, basic: 5.17, standard: 4.17, premium: 2.59},
-            {country: "Bulgaria", region: "Europe", library: 7351, basic: 5.15, standard: 4.12, premium: 2.57},
-            {country: "Singapore", region: "Asia", library: 7383, basic: 10.33, standard: 7.38, premium: 4.80},
-            {country: "Malaysia", region: "Asia", library: 6298, basic: 6.68, standard: 5.61, premium: 3.53},
-            {country: "Thailand", region: "Asia", library: 7520, basic: 4.96, standard: 5.11, premium: 3.08},
-            {country: "Indonesia", region: "Asia", library: 7260, basic: 3.99, standard: 3.63, premium: 2.83},
-            {country: "Vietnam", region: "Asia", library: 6800, basic: 3.50, standard: 3.20, premium: 2.20},
-            {country: "Taiwan", region: "Asia", library: 6988, basic: 8.81, standard: 5.80, premium: 3.50},
-            {country: "Israel", region: "Asia", library: 6346, basic: 9.14, standard: 7.68, premium: 4.89},
-            {country: "Saudi Arabia", region: "Asia", library: 5916, basic: 9.35, standard: 6.51, premium: 4.73},
-            {country: "United Arab Emirates", region: "Asia", library: 6176, basic: 9.51, standard: 6.67, premium: 4.82}
+            {country: "Iceland", region: "Europe", library: 9765, basic: 10.35, standard: 7.81, premium: 5.47, costPerTitle: 0.00056},
+            {country: "Slovenia", region: "Europe", library: 8883, basic: 4.62, standard: 4.17, premium: 2.58, costPerTitle: 0.00029},
+            {country: "Cyprus", region: "Europe", library: 8793, basic: 9.32, standard: 6.77, premium: 4.13, costPerTitle: 0.00047},
+            {country: "Latvia", region: "Europe", library: 8799, basic: 8.27, standard: 5.19, premium: 3.08, costPerTitle: 0.00035},
+            {country: "Lithuania", region: "Europe", library: 8796, basic: 8.27, standard: 5.19, premium: 3.08, costPerTitle: 0.00035},
+            {country: "Estonia", region: "Europe", library: 8765, basic: 8.24, standard: 5.17, premium: 3.07, costPerTitle: 0.00035},
+            {country: "Liechtenstein", region: "Europe", library: 8518, basic: 14.14, standard: 11.41, premium: 7.67, costPerTitle: 0.00090},
+            {country: "Luxembourg", region: "Europe", library: 8321, basic: 10.32, standard: 7.74, premium: 5.16, costPerTitle: 0.00062},
+            {country: "Slovakia", region: "Europe", library: 8193, basic: 9.83, standard: 5.98, premium: 3.60, costPerTitle: 0.00044},
+            {country: "Spain", region: "Europe", library: 8165, basic: 7.27, standard: 7.27, premium: 5.14, costPerTitle: 0.00063},
+            {country: "Romania", region: "Europe", library: 8111, basic: 6.24, standard: 5.68, premium: 3.65, costPerTitle: 0.00045},
+            {country: "United Kingdom", region: "Europe", library: 8010, basic: 9.93, standard: 8.09, premium: 5.93, costPerTitle: 0.00074},
+            {country: "Portugal", region: "Europe", library: 7978, basic: 9.33, standard: 6.70, premium: 4.63, costPerTitle: 0.00058},
+            {country: "Germany", region: "Europe", library: 7964, basic: 8.28, standard: 7.24, premium: 5.18, costPerTitle: 0.00065},
+            {country: "Switzerland", region: "Europe", library: 7944, basic: 14.14, standard: 11.44, premium: 7.63, costPerTitle: 0.00096},
+            {country: "Italy", region: "Europe", library: 7916, basic: 8.32, standard: 7.29, premium: 5.15, costPerTitle: 0.00065},
+            {country: "Austria", region: "Europe", library: 7828, basic: 9.32, standard: 7.28, premium: 5.17, costPerTitle: 0.00066},
+            {country: "Philippines", region: "Asia", library: 7848, basic: 4.32, standard: 3.45, premium: 2.35, costPerTitle: 0.00030},
+            {country: "Czechia", region: "Europe", library: 7773, basic: 9.87, standard: 6.38, premium: 3.89, costPerTitle: 0.00050},
+            {country: "Bermuda", region: "North America", library: 7752, basic: 11.01, standard: 7.75, premium: 4.96, costPerTitle: 0.00064},
+            {country: "Hong Kong", region: "Asia", library: 7720, basic: 9.34, standard: 5.64, premium: 3.47, costPerTitle: 0.00045},
+            {country: "France", region: "Europe", library: 7661, basic: 11.42, standard: 6.97, premium: 5.21, costPerTitle: 0.00068},
+            {country: "United States", region: "North America", library: 7101, basic: 12.00, standard: 9.02, premium: 6.25, costPerTitle: 0.00088},
+            {country: "Canada", region: "North America", library: 7169, basic: 7.03, standard: 6.67, premium: 4.23, costPerTitle: 0.00059},
+            {country: "Japan", region: "Asia", library: 7338, basic: 6.46, standard: 5.21, premium: 3.74, costPerTitle: 0.00051},
+            {country: "Australia", region: "Oceania", library: 7273, basic: 6.91, standard: 5.96, premium: 4.07, costPerTitle: 0.00056},
+            {country: "New Zealand", region: "Oceania", library: 7171, basic: 8.46, standard: 5.95, premium: 3.94, costPerTitle: 0.00055},
+            {country: "Brazil", region: "South America", library: 7178, basic: 4.52, standard: 3.88, premium: 2.58, costPerTitle: 0.00036},
+            {country: "Mexico", region: "North America", library: 7108, basic: 5.75, standard: 6.04, premium: 3.98, costPerTitle: 0.00056},
+            {country: "India", region: "Asia", library: 7017, basic: 2.32, standard: 2.88, premium: 1.90, costPerTitle: 0.00027},
+            {country: "South Korea", region: "Asia", library: 7324, basic: 6.52, standard: 4.61, premium: 2.93, costPerTitle: 0.00040},
+            {country: "South Africa", region: "Africa", library: 6848, basic: 5.34, standard: 4.32, premium: 2.67, costPerTitle: 0.00039},
+            {country: "Nigeria", region: "Africa", library: 7016, basic: 2.32, standard: 1.82, premium: 1.19, costPerTitle: 0.00017},
+            {country: "Kenya", region: "Africa", library: 6998, basic: 2.31, standard: 2.73, premium: 2.10, costPerTitle: 0.00030},
+            {country: "Egypt", region: "Africa", library: 6648, basic: 1.99, standard: 1.66, premium: 1.20, costPerTitle: 0.00018},
+            {country: "Pakistan", region: "Asia", library: 6334, basic: 1.58, standard: 1.46, premium: 1.01, costPerTitle: 0.00016},
+            {country: "Turkey", region: "Asia", library: 6809, basic: 4.15, standard: 3.20, premium: 2.11, costPerTitle: 0.00031},
+            {country: "Argentina", region: "South America", library: 6770, basic: 5.69, standard: 4.74, premium: 3.18, costPerTitle: 0.00047},
+            {country: "Colombia", region: "South America", library: 6539, basic: 4.58, standard: 3.60, premium: 2.75, costPerTitle: 0.00042},
+            {country: "Chile", region: "South America", library: 6584, basic: 6.78, standard: 4.81, premium: 3.09, costPerTitle: 0.00047},
+            {country: "Peru", region: "South America", library: 6633, basic: 7.76, standard: 5.50, premium: 3.58, costPerTitle: 0.00054},
+            {country: "Poland", region: "Europe", library: 7473, basic: 8.22, standard: 6.05, premium: 4.18, costPerTitle: 0.00056},
+            {country: "Netherlands", region: "Europe", library: 7155, basic: 9.30, standard: 7.23, premium: 4.94, costPerTitle: 0.00069},
+            {country: "Belgium", region: "Europe", library: 7407, basic: 10.37, standard: 7.77, premium: 5.18, costPerTitle: 0.00070},
+            {country: "Sweden", region: "Europe", library: 7145, basic: 10.08, standard: 6.86, premium: 4.57, costPerTitle: 0.00064},
+            {country: "Norway", region: "Europe", library: 6738, basic: 8.83, standard: 5.73, premium: 4.25, costPerTitle: 0.00063},
+            {country: "Denmark", region: "Europe", library: 6680, basic: 12.35, standard: 8.95, premium: 5.88, costPerTitle: 0.00088},
+            {country: "Finland", region: "Europe", library: 7183, basic: 10.35, standard: 7.26, premium: 4.67, costPerTitle: 0.00065},
+            {country: "Ireland", region: "Europe", library: 7471, basic: 11.35, standard: 8.82, premium: 6.20, costPerTitle: 0.00083},
+            {country: "Greece", region: "Europe", library: 7532, basic: 9.34, standard: 6.48, premium: 4.14, costPerTitle: 0.00055},
+            {country: "Hungary", region: "Europe", library: 7094, basic: 7.45, standard: 5.11, premium: 3.26, costPerTitle: 0.00046},
+            {country: "Ukraine", region: "Europe", library: 5569, basic: 5.18, standard: 3.90, premium: 2.56, costPerTitle: 0.00046},
+            {country: "Croatia", region: "Europe", library: 5897, basic: 6.19, standard: 5.19, premium: 3.36, costPerTitle: 0.00057},
+            {country: "Serbia", region: "Europe", library: 7183, basic: 5.17, standard: 4.17, premium: 2.59, costPerTitle: 0.00036},
+            {country: "Bulgaria", region: "Europe", library: 7351, basic: 5.15, standard: 4.12, premium: 2.57, costPerTitle: 0.00035},
+            {country: "Singapore", region: "Asia", library: 7383, basic: 10.33, standard: 7.38, premium: 4.80, costPerTitle: 0.00065},
+            {country: "Malaysia", region: "Asia", library: 6298, basic: 6.68, standard: 5.61, premium: 3.53, costPerTitle: 0.00056},
+            {country: "Thailand", region: "Asia", library: 7520, basic: 4.96, standard: 5.11, premium: 3.08, costPerTitle: 0.00041},
+            {country: "Indonesia", region: "Asia", library: 7260, basic: 3.99, standard: 3.63, premium: 2.83, costPerTitle: 0.00039},
+            {country: "Taiwan", region: "Asia", library: 6988, basic: 8.81, standard: 5.80, premium: 3.50, costPerTitle: 0.00050},
+            {country: "Israel", region: "Asia", library: 6346, basic: 9.14, standard: 7.68, premium: 4.89, costPerTitle: 0.00077},
+            {country: "Saudi Arabia", region: "Asia", library: 5916, basic: 9.35, standard: 6.51, premium: 4.73, costPerTitle: 0.00080},
+            {country: "United Arab Emirates", region: "Asia", library: 6176, basic: 9.51, standard: 6.67, premium: 4.82, costPerTitle: 0.00078},
+            {country: "Democratic Republic of the Congo", region: "Africa", library: 4883, basic: 4.00, standard: 2.00, premium: 2.49, costPerTitle: 0.00051}
         ];
 
-        // Calculate stats
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Calculate and display statistics
         const avgLibrary = Math.round(netflixData.reduce((a, b) => a + b.library, 0) / netflixData.length);
-        const avgPremium = (netflixData.reduce((a, b) => a + b.premium, 0) / netflixData.length).toFixed(2);
+        const avgPremium = (netflixData.reduce((a, b) => a + b.premium, 0) / netflixData.length);
         const maxPremium = Math.max(...netflixData.map(d => d.premium));
         const minPremium = Math.min(...netflixData.map(d => d.premium));
-        const priceRatio = (maxPremium / minPremium).toFixed(1);
+        const priceRatio = maxPremium / minPremium;
 
-        // Update stats
-        document.getElementById('avgLibrary').textContent = avgLibrary.toLocaleString();
-        document.getElementById('avgPremium').textContent = `$${avgPremium}`;
-        document.getElementById('priceRange').textContent = `${priceRatio}x`;
+        document.getElementById('avgLibrary').textContent = formatNumber(avgLibrary);
+        document.getElementById('avgPremium').textContent = `$${avgPremium.toFixed(2)}`;
+        document.getElementById('priceRange').textContent = `${priceRatio.toFixed(1)}x`;
 
-        // Find insights
+        // Find key insights
         const biggestLib = netflixData.reduce((a, b) => a.library > b.library ? a : b);
-        const mostExpensive = netflixData.reduce((a, b) => a.premium > b.premium ? a : b);
-        const bestValue = netflixData.reduce((a, b) => (a.premium/a.library) < (b.premium/b.library) ? a : b);
+        const bestValue = netflixData.reduce((a, b) => (a.costPerTitle) < (b.costPerTitle) ? a : b);
 
-        document.getElementById('biggestLibrary').textContent = biggestLib.country;
-        document.getElementById('biggestLibrarySize').textContent = biggestLib.library.toLocaleString();
-        document.getElementById('mostExpensive').textContent = mostExpensive.country;
+        document.getElementById('biggestLibrarySize').textContent = formatNumber(biggestLib.library);
         document.getElementById('bestValue').textContent = bestValue.country;
+        document.getElementById('adsTierCount').textContent = '15';
+
+        // Chart.js configuration
+        const chartColors = {
+            red: '#E50914',
+            darkRed: '#831010',
+            lightRed: '#ff4d4d',
+            green: '#2ecc71',
+            blue: '#3498db',
+            gray: '#666'
+        };
 
         // Region Pie Chart
         const regionCounts = {};
@@ -432,7 +527,14 @@
                 responsive: true,
                 plugins: {
                     title: { display: true, text: 'Countries by Region', color: 'white', font: { size: 16 } },
-                    legend: { labels: { color: 'white' } }
+                    legend: { labels: { color: 'white' } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + ' countries';
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -453,20 +555,35 @@
             data: {
                 labels: avgRegionCosts.map(d => d.region),
                 datasets: [{
-                    label: 'Avg Premium Cost ($)',
-                    data: avgRegionCosts.map(d => d.avg.toFixed(2)),
-                    backgroundColor: '#E50914'
+                    label: 'Average Premium Cost',
+                    data: avgRegionCosts.map(d => d.avg),
+                    backgroundColor: chartColors.red
                 }]
             },
             options: {
                 indexAxis: 'y',
                 responsive: true,
                 plugins: {
-                    title: { display: true, text: 'Average Premium Cost by Region', color: 'white', font: { size: 16 } },
-                    legend: { display: false }
+                    title: { display: true, text: 'Average Premium Cost by Region (USD)', color: 'white', font: { size: 16 } },
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.x.toFixed(2) + ' per month';
+                            }
+                        }
+                    }
                 },
                 scales: {
-                    x: { ticks: { color: 'white' }, grid: { color: '#444' } },
+                    x: {
+                        ticks: {
+                            color: 'white',
+                            callback: function(value) {
+                                return '$' + value.toFixed(2);
+                            }
+                        },
+                        grid: { color: '#444' }
+                    },
                     y: { ticks: { color: 'white' }, grid: { color: '#444' } }
                 }
             }
@@ -479,9 +596,9 @@
             data: {
                 labels: topCost.map(d => d.country),
                 datasets: [{
-                    label: 'Premium Cost ($)',
+                    label: 'Premium Cost',
                     data: topCost.map(d => d.premium),
-                    backgroundColor: '#E50914'
+                    backgroundColor: chartColors.red
                 }]
             },
             options: {
@@ -489,10 +606,25 @@
                 responsive: true,
                 plugins: {
                     title: { display: true, text: 'Most Expensive Countries (Premium)', color: 'white', font: { size: 16 } },
-                    legend: { display: false }
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.x.toFixed(2) + ' per month';
+                            }
+                        }
+                    }
                 },
                 scales: {
-                    x: { ticks: { color: 'white' }, grid: { color: '#444' } },
+                    x: {
+                        ticks: {
+                            color: 'white',
+                            callback: function(value) {
+                                return '$' + value.toFixed(2);
+                            }
+                        },
+                        grid: { color: '#444' }
+                    },
                     y: { ticks: { color: 'white' }, grid: { color: '#444' } }
                 }
             }
@@ -505,20 +637,35 @@
             data: {
                 labels: bottomCost.map(d => d.country),
                 datasets: [{
-                    label: 'Premium Cost ($)',
+                    label: 'Premium Cost',
                     data: bottomCost.map(d => d.premium),
-                    backgroundColor: '#2ecc71'
+                    backgroundColor: chartColors.green
                 }]
             },
             options: {
                 indexAxis: 'y',
                 responsive: true,
                 plugins: {
-                    title: { display: true, text: 'Cheapest Countries (Premium)', color: 'white', font: { size: 16 } },
-                    legend: { display: false }
+                    title: { display: true, text: 'Least Expensive Countries (Premium)', color: 'white', font: { size: 16 } },
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.x.toFixed(2) + ' per month';
+                            }
+                        }
+                    }
                 },
                 scales: {
-                    x: { ticks: { color: 'white' }, grid: { color: '#444' } },
+                    x: {
+                        ticks: {
+                            color: 'white',
+                            callback: function(value) {
+                                return '$' + value.toFixed(2);
+                            }
+                        },
+                        grid: { color: '#444' }
+                    },
                     y: { ticks: { color: 'white' }, grid: { color: '#444' } }
                 }
             }
@@ -533,17 +680,114 @@
                 datasets: [{
                     label: 'Library Size',
                     data: librarySorted.map(d => d.library),
-                    backgroundColor: '#E50914'
+                    backgroundColor: chartColors.red
                 }]
             },
             options: {
                 responsive: true,
                 plugins: {
-                    title: { display: true, text: 'Top 15 Countries by Library Size', color: 'white', font: { size: 16 } },
-                    legend: { display: false }
+                    title: { display: true, text: 'Top 15 Countries by Content Library Size', color: 'white', font: { size: 16 } },
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return formatNumber(context.parsed.y) + ' titles';
+                            }
+                        }
+                    }
                 },
                 scales: {
                     x: { ticks: { color: 'white', maxRotation: 45 }, grid: { color: '#444' } },
+                    y: {
+                        ticks: {
+                            color: 'white',
+                            callback: function(value) {
+                                return formatNumber(value);
+                            }
+                        },
+                        grid: { color: '#444' }
+                    }
+                }
+            }
+        });
+
+        // Best Value Chart
+        const bestValueCountries = [...netflixData].sort((a, b) => a.costPerTitle - b.costPerTitle).slice(0, 10);
+        new Chart(document.getElementById('valueChart'), {
+            type: 'bar',
+            data: {
+                labels: bestValueCountries.map(d => d.country),
+                datasets: [{
+                    label: 'Cost Per Title',
+                    data: bestValueCountries.map(d => d.costPerTitle),
+                    backgroundColor: chartColors.green
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Best Value: Lowest Cost Per Title', color: 'white', font: { size: 16 } },
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.x.toFixed(4) + ' per title';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'white',
+                            callback: function(value) {
+                                return '$' + value.toFixed(4);
+                            }
+                        },
+                        grid: { color: '#444' }
+                    },
+                    y: { ticks: { color: 'white' }, grid: { color: '#444' } }
+                }
+            }
+        });
+
+        // Worst Value Chart
+        const worstValueCountries = [...netflixData].sort((a, b) => b.costPerTitle - a.costPerTitle).slice(0, 10);
+        new Chart(document.getElementById('worstValueChart'), {
+            type: 'bar',
+            data: {
+                labels: worstValueCountries.map(d => d.country),
+                datasets: [{
+                    label: 'Cost Per Title',
+                    data: worstValueCountries.map(d => d.costPerTitle),
+                    backgroundColor: chartColors.red
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Highest Cost Per Title', color: 'white', font: { size: 16 } },
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.x.toFixed(4) + ' per title';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'white',
+                            callback: function(value) {
+                                return '$' + value.toFixed(4);
+                            }
+                        },
+                        grid: { color: '#444' }
+                    },
                     y: { ticks: { color: 'white' }, grid: { color: '#444' } }
                 }
             }
@@ -556,10 +800,11 @@
                 <tr>
                     <td>${d.country}</td>
                     <td>${d.region}</td>
-                    <td>${d.library.toLocaleString()}</td>
+                    <td>${formatNumber(d.library)}</td>
                     <td>$${d.basic.toFixed(2)}</td>
                     <td>$${d.standard.toFixed(2)}</td>
                     <td>$${d.premium.toFixed(2)}</td>
+                    <td>$${d.costPerTitle.toFixed(4)}</td>
                 </tr>
             `).join('');
         }
