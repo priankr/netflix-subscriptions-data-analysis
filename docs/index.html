@@ -125,11 +125,6 @@
             gap: 20px;
         }
 
-        .pie-chart-wrapper {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
         .table-container {
             overflow-x: auto;
             background: var(--netflix-gray);
@@ -279,9 +274,7 @@
             </p>
             <div class="chart-row">
                 <div class="chart-container">
-                    <div class="pie-chart-wrapper">
-                        <canvas id="regionPieChart"></canvas>
-                    </div>
+                    <canvas id="regionPieChart"></canvas>
                     <div class="chart-annotation">
                         <strong>Key Pattern:</strong> Europe accounts for the majority of Netflix markets, reflecting established streaming infrastructure
                         and high broadband penetration in developed economies.
@@ -493,6 +486,8 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: true,
+                aspectRatio: 1.5,
                 plugins: {
                     title: { display: true, text: 'Countries by Region', color: 'white', font: { size: 16 } },
                     legend: {
@@ -534,6 +529,8 @@
             options: {
                 indexAxis: 'y',
                 responsive: true,
+                maintainAspectRatio: true,
+                aspectRatio: 1.5,
                 plugins: {
                     title: { display: true, text: 'Average Premium Cost by Region (USD)', color: 'white', font: { size: 16 } },
                     legend: { display: false },
