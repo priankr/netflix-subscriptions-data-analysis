@@ -125,6 +125,11 @@
             gap: 20px;
         }
 
+        .pie-chart-wrapper {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
         .table-container {
             overflow-x: auto;
             background: var(--netflix-gray);
@@ -274,7 +279,9 @@
             </p>
             <div class="chart-row">
                 <div class="chart-container">
-                    <canvas id="regionPieChart"></canvas>
+                    <div class="pie-chart-wrapper">
+                        <canvas id="regionPieChart"></canvas>
+                    </div>
                     <div class="chart-annotation">
                         <strong>Key Pattern:</strong> Europe accounts for the majority of Netflix markets, reflecting established streaming infrastructure
                         and high broadband penetration in developed economies.
@@ -309,45 +316,6 @@
                     <div class="chart-annotation">
                         <strong>Observation:</strong> Pakistan and several African nations offer the lowest subscription costs, often below $2.00 per month.
                         This aggressive pricing aims to maximize market penetration in price-sensitive regions.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="chart-section">
-            <h2>Content Library Size Distribution</h2>
-            <p class="section-description">
-                Content availability varies due to licensing agreements, local regulations, and regional production investments.
-                Library sizes range from approximately 4,900 to 9,800 titles.
-            </p>
-            <div class="chart-container">
-                <canvas id="libraryChart"></canvas>
-                <div class="chart-annotation">
-                    <strong>Key Finding:</strong> Iceland leads with the largest content library at 9,765 titles, while the Democratic Republic of the Congo
-                    has the smallest at 4,883 titles—a difference of nearly 5,000 titles. Most countries cluster between 6,500 and 7,500 titles.
-                </div>
-            </div>
-        </div>
-
-        <div class="chart-section">
-            <h2>Value Analysis: Cost Per Title</h2>
-            <p class="section-description">
-                The most meaningful value metric combines both price and content volume. Cost per title shows how much subscribers effectively
-                pay for each piece of accessible content.
-            </p>
-            <div class="chart-row">
-                <div class="chart-container">
-                    <canvas id="valueChart"></canvas>
-                    <div class="chart-annotation">
-                        <strong>Best Value Markets:</strong> Pakistan, Nigeria, and Egypt offer exceptional value with cost per title below $0.0020.
-                        These markets combine lower subscription fees with substantial content libraries.
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <canvas id="worstValueChart"></canvas>
-                    <div class="chart-annotation">
-                        <strong>Highest Cost Markets:</strong> Developed European markets show the highest cost per title, exceeding $0.0015 in some cases.
-                        Subscribers in these regions pay significantly more for comparable content access.
                     </div>
                 </div>
             </div>
@@ -662,128 +630,6 @@
                             color: 'white',
                             callback: function(value) {
                                 return '$' + value.toFixed(2);
-                            }
-                        },
-                        grid: { color: '#444' }
-                    },
-                    y: { ticks: { color: 'white' }, grid: { color: '#444' } }
-                }
-            }
-        });
-
-        // Library Size Chart
-        const librarySorted = [...netflixData].sort((a, b) => b.library - a.library).slice(0, 15);
-        new Chart(document.getElementById('libraryChart'), {
-            type: 'bar',
-            data: {
-                labels: librarySorted.map(d => d.country),
-                datasets: [{
-                    label: 'Library Size',
-                    data: librarySorted.map(d => d.library),
-                    backgroundColor: chartColors.red
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    title: { display: true, text: 'Top 15 Countries by Content Library Size', color: 'white', font: { size: 16 } },
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return formatNumber(context.parsed.y) + ' titles';
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: { ticks: { color: 'white', maxRotation: 45 }, grid: { color: '#444' } },
-                    y: {
-                        ticks: {
-                            color: 'white',
-                            callback: function(value) {
-                                return formatNumber(value);
-                            }
-                        },
-                        grid: { color: '#444' }
-                    }
-                }
-            }
-        });
-
-        // Best Value Chart
-        const bestValueCountries = [...netflixData].sort((a, b) => a.costPerTitle - b.costPerTitle).slice(0, 10);
-        new Chart(document.getElementById('valueChart'), {
-            type: 'bar',
-            data: {
-                labels: bestValueCountries.map(d => d.country),
-                datasets: [{
-                    label: 'Cost Per Title',
-                    data: bestValueCountries.map(d => d.costPerTitle),
-                    backgroundColor: chartColors.green
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                plugins: {
-                    title: { display: true, text: 'Best Value: Lowest Cost Per Title', color: 'white', font: { size: 16 } },
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return '$' + context.parsed.x.toFixed(4) + ' per title';
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: 'white',
-                            callback: function(value) {
-                                return '$' + value.toFixed(4);
-                            }
-                        },
-                        grid: { color: '#444' }
-                    },
-                    y: { ticks: { color: 'white' }, grid: { color: '#444' } }
-                }
-            }
-        });
-
-        // Worst Value Chart
-        const worstValueCountries = [...netflixData].sort((a, b) => b.costPerTitle - a.costPerTitle).slice(0, 10);
-        new Chart(document.getElementById('worstValueChart'), {
-            type: 'bar',
-            data: {
-                labels: worstValueCountries.map(d => d.country),
-                datasets: [{
-                    label: 'Cost Per Title',
-                    data: worstValueCountries.map(d => d.costPerTitle),
-                    backgroundColor: chartColors.red
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                plugins: {
-                    title: { display: true, text: 'Highest Cost Per Title', color: 'white', font: { size: 16 } },
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return '$' + context.parsed.x.toFixed(4) + ' per title';
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: 'white',
-                            callback: function(value) {
-                                return '$' + value.toFixed(4);
                             }
                         },
                         grid: { color: '#444' }
