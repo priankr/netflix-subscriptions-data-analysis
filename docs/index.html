@@ -495,7 +495,10 @@
                 responsive: true,
                 plugins: {
                     title: { display: true, text: 'Countries by Region', color: 'white', font: { size: 16 } },
-                    legend: { labels: { color: 'white' } },
+                    legend: {
+                        position: 'right',
+                        labels: { color: 'white' }
+                    },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
